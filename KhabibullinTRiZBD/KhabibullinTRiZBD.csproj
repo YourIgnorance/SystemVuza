@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{70985DB6-72E0-4D7C-BB07-8F29355AC5A7}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>KhabibullinTRiZBD</RootNamespace>
+    <AssemblyName>KhabibullinTRiZBD</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="AddEditPage.xaml.cs">
+      <DependentUpon>AddEditPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Disciplina.cs">
+      <DependentUpon>KhabibullinInformationayaSystemaVUZA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Fakultet.cs">
+      <DependentUpon>KhabibullinInformationayaSystemaVUZA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Kafedra.cs">
+      <DependentUpon>KhabibullinInformationayaSystemaVUZA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="KhabibullinInformationayaSystemaVUZA.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KhabibullinInformationayaSystemaVUZA.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="KhabibullinInformationayaSystemaVUZA.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KhabibullinInformationayaSystemaVUZA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="KhabibullinInformationayaSystemaVUZA.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KhabibullinInformationayaSystemaVUZA.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Prepodavatel.cs">
+      <DependentUpon>KhabibullinInformationayaSystemaVUZA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="prepodsmall.cs">
+      <DependentUpon>KhabibullinInformationayaSystemaVUZA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TeacherPage.xaml.cs">
+      <DependentUpon>TeacherPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Uchebnaya_nagruzka.cs">
+      <DependentUpon>KhabibullinInformationayaSystemaVUZA.tt</DependentUpon>
+    </Compile>
+    <Page Include="AddEditPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="TeacherPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Manager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EntityDeploy Include="KhabibullinInformationayaSystemaVUZA.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>KhabibullinInformationayaSystemaVUZA.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="KhabibullinInformationayaSystemaVUZA.edmx.diagram">
+      <DependentUpon>KhabibullinInformationayaSystemaVUZA.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="KhabibullinInformationayaSystemaVUZA.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>KhabibullinInformationayaSystemaVUZA.Context.cs</LastGenOutput>
+      <DependentUpon>KhabibullinInformationayaSystemaVUZA.edmx</DependentUpon>
+    </Content>
+    <Content Include="KhabibullinInformationayaSystemaVUZA.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>KhabibullinInformationayaSystemaVUZA.edmx</DependentUpon>
+      <LastGenOutput>KhabibullinInformationayaSystemaVUZA.cs</LastGenOutput>
+    </Content>
+    <Resource Include="Res\Logo.png" />
+    <Resource Include="Res\icon.png" />
+    <Resource Include="Teachers\picture.png" />
+    <Resource Include="Teachers\1.png" />
+    <Resource Include="Teachers\10.png" />
+    <Resource Include="Teachers\11.png" />
+    <Resource Include="Teachers\12.png" />
+    <Resource Include="Teachers\13.png" />
+    <Resource Include="Teachers\14.png" />
+    <Resource Include="Teachers\15.png" />
+    <Resource Include="Teachers\16.png" />
+    <Resource Include="Teachers\17.png" />
+    <Resource Include="Teachers\18.png" />
+    <Resource Include="Teachers\19.png" />
+    <Resource Include="Teachers\2.png" />
+    <Resource Include="Teachers\20.png" />
+    <Resource Include="Teachers\21.png" />
+    <Resource Include="Teachers\22.png" />
+    <Resource Include="Teachers\23.png" />
+    <Resource Include="Teachers\24.png" />
+    <Resource Include="Teachers\25.png" />
+    <Resource Include="Teachers\26.png" />
+    <Resource Include="Teachers\27.png" />
+    <Resource Include="Teachers\28.png" />
+    <Resource Include="Teachers\29.png" />
+    <Resource Include="Teachers\3.png" />
+    <Resource Include="Teachers\30.png" />
+    <Resource Include="Teachers\31.png" />
+    <Resource Include="Teachers\32.png" />
+    <Resource Include="Teachers\4.png" />
+    <Resource Include="Teachers\5.png" />
+    <Resource Include="Teachers\6.png" />
+    <Resource Include="Teachers\7.png" />
+    <Resource Include="Teachers\8.png" />
+    <Resource Include="Teachers\9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

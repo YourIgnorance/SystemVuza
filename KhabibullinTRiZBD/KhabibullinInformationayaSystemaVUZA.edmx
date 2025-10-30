@@ -1,0 +1,479 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище InformationayaSystemaVUZAModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Disciplina">
+          <Key>
+            <PropertyRef Name="Kod_disciplini" />
+          </Key>
+          <Property Name="Kod_disciplini" Type="int" Nullable="false" />
+          <Property Name="Kod_kafedry" Type="int" Nullable="false" />
+          <Property Name="Nazvanie_disciplini" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Kl_chasov" Type="int" Nullable="false" />
+          <Property Name="Tsikl_disciplini" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Fakultet">
+          <Key>
+            <PropertyRef Name="Kod_fakulteta" />
+          </Key>
+          <Property Name="Kod_fakulteta" Type="int" Nullable="false" />
+          <Property Name="Nazvanie_fak" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Lastname" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Firstname" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Patronymic" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="N_komnaty" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="N_korpusa" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Telefon" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kafedra">
+          <Key>
+            <PropertyRef Name="Kod_kafedry" />
+          </Key>
+          <Property Name="Kod_kafedry" Type="int" Nullable="false" />
+          <Property Name="Kod_fakulteta" Type="int" Nullable="false" />
+          <Property Name="Kol_prepod" Type="int" Nullable="false" />
+          <Property Name="Nazvanie_kaf" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Lastname" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Firstname" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Patronymic" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="N_komnaty" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="N_korpusa" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telefon" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Prepodavatel">
+          <Key>
+            <PropertyRef Name="Kod_prepod" />
+          </Key>
+          <Property Name="Kod_prepod" Type="int" Nullable="false" />
+          <Property Name="Kod_kafedry" Type="int" Nullable="false" />
+          <Property Name="Lastname" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Firstname" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Patronymic" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Date_rozhd" Type="date" />
+          <Property Name="God_post" Type="int" Nullable="false" />
+          <Property Name="Stazh" Type="int" Nullable="false" />
+          <Property Name="Dolzhnost" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Photo" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "InformationayaSystemaVUZA.dbo.prepodsmall" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="prepodsmall">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="Имя" />
+            <PropertyRef Name="Фамилия" />
+            <PropertyRef Name="Отчество" />
+            <PropertyRef Name="Стаж" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Имя" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Фамилия" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Отчество" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Стаж" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Uchebnaya_nagruzka">
+          <Key>
+            <PropertyRef Name="Kod_nagruzki" />
+          </Key>
+          <Property Name="Kod_nagruzki" Type="int" Nullable="false" />
+          <Property Name="Kod_prepod" Type="int" Nullable="false" />
+          <Property Name="Kod_disciplini" Type="int" Nullable="false" />
+          <Property Name="Ucheb_god" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Semestr" Type="int" Nullable="false" />
+          <Property Name="Gruppy" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Kol_student" Type="int" Nullable="false" />
+          <Property Name="Itog_kontrol" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Uchebnaya__Kod_d__4AB81AF0">
+          <End Role="Disciplina" Type="Self.Disciplina" Multiplicity="1" />
+          <End Role="Uchebnaya_nagruzka" Type="Self.Uchebnaya_nagruzka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Disciplina">
+              <PropertyRef Name="Kod_disciplini" />
+            </Principal>
+            <Dependent Role="Uchebnaya_nagruzka">
+              <PropertyRef Name="Kod_disciplini" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Uchebnaya__Kod_p__49C3F6B7">
+          <End Role="Prepodavatel" Type="Self.Prepodavatel" Multiplicity="1" />
+          <End Role="Uchebnaya_nagruzka" Type="Self.Uchebnaya_nagruzka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prepodavatel">
+              <PropertyRef Name="Kod_prepod" />
+            </Principal>
+            <Dependent Role="Uchebnaya_nagruzka">
+              <PropertyRef Name="Kod_prepod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disciplina_Kafedra">
+          <End Role="Kafedra" Type="Self.Kafedra" Multiplicity="1" />
+          <End Role="Disciplina" Type="Self.Disciplina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kafedra">
+              <PropertyRef Name="Kod_kafedry" />
+            </Principal>
+            <Dependent Role="Disciplina">
+              <PropertyRef Name="Kod_kafedry" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kafedra_Fakultet">
+          <End Role="Fakultet" Type="Self.Fakultet" Multiplicity="1" />
+          <End Role="Kafedra" Type="Self.Kafedra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fakultet">
+              <PropertyRef Name="Kod_fakulteta" />
+            </Principal>
+            <Dependent Role="Kafedra">
+              <PropertyRef Name="Kod_fakulteta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prepodavatel_Kafedra">
+          <End Role="Kafedra" Type="Self.Kafedra" Multiplicity="1" />
+          <End Role="Prepodavatel" Type="Self.Prepodavatel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kafedra">
+              <PropertyRef Name="Kod_kafedry" />
+            </Principal>
+            <Dependent Role="Prepodavatel">
+              <PropertyRef Name="Kod_kafedry" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище InformationayaSystemaVUZAModelContainer">
+          <EntitySet Name="Disciplina" EntityType="Self.Disciplina" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fakultet" EntityType="Self.Fakultet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kafedra" EntityType="Self.Kafedra" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Prepodavatel" EntityType="Self.Prepodavatel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Uchebnaya_nagruzka" EntityType="Self.Uchebnaya_nagruzka" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="prepodsmall" EntityType="Self.prepodsmall" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [prepodsmall].[id] AS [id], 
+    [prepodsmall].[Имя] AS [Имя], 
+    [prepodsmall].[Фамилия] AS [Фамилия], 
+    [prepodsmall].[Отчество] AS [Отчество], 
+    [prepodsmall].[Стаж] AS [Стаж]
+    FROM [dbo].[prepodsmall] AS [prepodsmall]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Uchebnaya__Kod_d__4AB81AF0" Association="Self.FK__Uchebnaya__Kod_d__4AB81AF0">
+            <End Role="Disciplina" EntitySet="Disciplina" />
+            <End Role="Uchebnaya_nagruzka" EntitySet="Uchebnaya_nagruzka" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Uchebnaya__Kod_p__49C3F6B7" Association="Self.FK__Uchebnaya__Kod_p__49C3F6B7">
+            <End Role="Prepodavatel" EntitySet="Prepodavatel" />
+            <End Role="Uchebnaya_nagruzka" EntitySet="Uchebnaya_nagruzka" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disciplina_Kafedra" Association="Self.FK_Disciplina_Kafedra">
+            <End Role="Kafedra" EntitySet="Kafedra" />
+            <End Role="Disciplina" EntitySet="Disciplina" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kafedra_Fakultet" Association="Self.FK_Kafedra_Fakultet">
+            <End Role="Fakultet" EntitySet="Fakultet" />
+            <End Role="Kafedra" EntitySet="Kafedra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prepodavatel_Kafedra" Association="Self.FK_Prepodavatel_Kafedra">
+            <End Role="Kafedra" EntitySet="Kafedra" />
+            <End Role="Prepodavatel" EntitySet="Prepodavatel" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InformationayaSystemaVUZAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Disciplina">
+          <Key>
+            <PropertyRef Name="Kod_disciplini" />
+          </Key>
+          <Property Name="Kod_disciplini" Type="Int32" Nullable="false" />
+          <Property Name="Kod_kafedry" Type="Int32" Nullable="false" />
+          <Property Name="Nazvanie_disciplini" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Kl_chasov" Type="Int32" Nullable="false" />
+          <Property Name="Tsikl_disciplini" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Uchebnaya_nagruzka" Relationship="Self.FK__Uchebnaya__Kod_d__4AB81AF0" FromRole="Disciplina" ToRole="Uchebnaya_nagruzka" />
+          <NavigationProperty Name="Kafedra" Relationship="Self.FK_Disciplina_Kafedra" FromRole="Disciplina" ToRole="Kafedra" />
+        </EntityType>
+        <EntityType Name="Fakultet">
+          <Key>
+            <PropertyRef Name="Kod_fakulteta" />
+          </Key>
+          <Property Name="Kod_fakulteta" Type="Int32" Nullable="false" />
+          <Property Name="Nazvanie_fak" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Lastname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Firstname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="N_komnaty" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="N_korpusa" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefon" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Kafedra" Relationship="Self.FK_Kafedra_Fakultet" FromRole="Fakultet" ToRole="Kafedra" />
+        </EntityType>
+        <EntityType Name="Kafedra">
+          <Key>
+            <PropertyRef Name="Kod_kafedry" />
+          </Key>
+          <Property Name="Kod_kafedry" Type="Int32" Nullable="false" />
+          <Property Name="Kod_fakulteta" Type="Int32" Nullable="false" />
+          <Property Name="Kol_prepod" Type="Int32" Nullable="false" />
+          <Property Name="Nazvanie_kaf" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Lastname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Firstname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="N_komnaty" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="N_korpusa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefon" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Disciplina" Relationship="Self.FK_Disciplina_Kafedra" FromRole="Kafedra" ToRole="Disciplina" />
+          <NavigationProperty Name="Fakultet" Relationship="Self.FK_Kafedra_Fakultet" FromRole="Kafedra" ToRole="Fakultet" />
+          <NavigationProperty Name="Prepodavatel" Relationship="Self.FK__Prepodava__Kafedra" FromRole="Kafedra" ToRole="Prepodavatel" />
+        </EntityType>
+        <EntityType Name="Prepodavatel">
+          <Key>
+            <PropertyRef Name="Kod_prepod" />
+          </Key>
+          <Property Name="Kod_prepod" Type="Int32" Nullable="false" />
+          <Property Name="Kod_kafedry" Type="Int32" Nullable="false" />
+          <Property Name="Lastname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Firstname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="God_post" Type="Int32" Nullable="false" />
+          <Property Name="Stazh" Type="Int32" Nullable="false" />
+          <Property Name="Dolzhnost" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Kafedra" Relationship="Self.FK__Prepodava__Kafedra" FromRole="Prepodavatel" ToRole="Kafedra" />
+          <NavigationProperty Name="Uchebnaya_nagruzka" Relationship="Self.FK__Uchebnaya__Kod_p__49C3F6B7" FromRole="Prepodavatel" ToRole="Uchebnaya_nagruzka" />
+          <Property Name="Photo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Date_rozhd" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Uchebnaya_nagruzka">
+          <Key>
+            <PropertyRef Name="Kod_nagruzki" />
+          </Key>
+          <Property Name="Kod_nagruzki" Type="Int32" Nullable="false" />
+          <Property Name="Kod_prepod" Type="Int32" Nullable="false" />
+          <Property Name="Kod_disciplini" Type="Int32" Nullable="false" />
+          <Property Name="Ucheb_god" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Semestr" Type="Int32" Nullable="false" />
+          <Property Name="Gruppy" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Kol_student" Type="Int32" Nullable="false" />
+          <Property Name="Itog_kontrol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Disciplina" Relationship="Self.FK__Uchebnaya__Kod_d__4AB81AF0" FromRole="Uchebnaya_nagruzka" ToRole="Disciplina" />
+          <NavigationProperty Name="Prepodavatel" Relationship="Self.FK__Uchebnaya__Kod_p__49C3F6B7" FromRole="Uchebnaya_nagruzka" ToRole="Prepodavatel" />
+        </EntityType>
+        <EntityType Name="prepodsmall">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="Имя" />
+            <PropertyRef Name="Фамилия" />
+            <PropertyRef Name="Отчество" />
+            <PropertyRef Name="Стаж" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Имя" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Фамилия" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Отчество" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Стаж" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Uchebnaya__Kod_d__4AB81AF0">
+          <End Role="Disciplina" Type="Self.Disciplina" Multiplicity="1" />
+          <End Role="Uchebnaya_nagruzka" Type="Self.Uchebnaya_nagruzka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Disciplina">
+              <PropertyRef Name="Kod_disciplini" />
+            </Principal>
+            <Dependent Role="Uchebnaya_nagruzka">
+              <PropertyRef Name="Kod_disciplini" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disciplina_Kafedra">
+          <End Role="Kafedra" Type="Self.Kafedra" Multiplicity="1" />
+          <End Role="Disciplina" Type="Self.Disciplina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kafedra">
+              <PropertyRef Name="Kod_kafedry" />
+            </Principal>
+            <Dependent Role="Disciplina">
+              <PropertyRef Name="Kod_kafedry" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kafedra_Fakultet">
+          <End Role="Fakultet" Type="Self.Fakultet" Multiplicity="1" />
+          <End Role="Kafedra" Type="Self.Kafedra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fakultet">
+              <PropertyRef Name="Kod_fakulteta" />
+            </Principal>
+            <Dependent Role="Kafedra">
+              <PropertyRef Name="Kod_fakulteta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Prepodava__Kafedra">
+          <End Role="Kafedra" Type="Self.Kafedra" Multiplicity="1" />
+          <End Role="Prepodavatel" Type="Self.Prepodavatel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kafedra">
+              <PropertyRef Name="Kod_kafedry" />
+            </Principal>
+            <Dependent Role="Prepodavatel">
+              <PropertyRef Name="Kod_kafedry" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Uchebnaya__Kod_p__49C3F6B7">
+          <End Role="Prepodavatel" Type="Self.Prepodavatel" Multiplicity="1" />
+          <End Role="Uchebnaya_nagruzka" Type="Self.Uchebnaya_nagruzka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prepodavatel">
+              <PropertyRef Name="Kod_prepod" />
+            </Principal>
+            <Dependent Role="Uchebnaya_nagruzka">
+              <PropertyRef Name="Kod_prepod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="InformationayaSystemaVUZAEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Disciplina" EntityType="Self.Disciplina" />
+          <EntitySet Name="Fakultet" EntityType="Self.Fakultet" />
+          <EntitySet Name="Kafedra" EntityType="Self.Kafedra" />
+          <EntitySet Name="Prepodavatel" EntityType="Self.Prepodavatel" />
+          <EntitySet Name="Uchebnaya_nagruzka" EntityType="Self.Uchebnaya_nagruzka" />
+          <EntitySet Name="prepodsmall" EntityType="Self.prepodsmall" />
+          <AssociationSet Name="FK__Uchebnaya__Kod_d__4AB81AF0" Association="Self.FK__Uchebnaya__Kod_d__4AB81AF0">
+            <End Role="Disciplina" EntitySet="Disciplina" />
+            <End Role="Uchebnaya_nagruzka" EntitySet="Uchebnaya_nagruzka" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disciplina_Kafedra" Association="Self.FK_Disciplina_Kafedra">
+            <End Role="Kafedra" EntitySet="Kafedra" />
+            <End Role="Disciplina" EntitySet="Disciplina" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kafedra_Fakultet" Association="Self.FK_Kafedra_Fakultet">
+            <End Role="Fakultet" EntitySet="Fakultet" />
+            <End Role="Kafedra" EntitySet="Kafedra" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Prepodava__Kafedra" Association="Self.FK__Prepodava__Kafedra">
+            <End Role="Kafedra" EntitySet="Kafedra" />
+            <End Role="Prepodavatel" EntitySet="Prepodavatel" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Uchebnaya__Kod_p__49C3F6B7" Association="Self.FK__Uchebnaya__Kod_p__49C3F6B7">
+            <End Role="Prepodavatel" EntitySet="Prepodavatel" />
+            <End Role="Uchebnaya_nagruzka" EntitySet="Uchebnaya_nagruzka" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище InformationayaSystemaVUZAModelContainer" CdmEntityContainer="InformationayaSystemaVUZAEntities">
+          <EntitySetMapping Name="Disciplina">
+            <EntityTypeMapping TypeName="InformationayaSystemaVUZAModel.Disciplina">
+              <MappingFragment StoreEntitySet="Disciplina">
+                <ScalarProperty Name="Kod_disciplini" ColumnName="Kod_disciplini" />
+                <ScalarProperty Name="Kod_kafedry" ColumnName="Kod_kafedry" />
+                <ScalarProperty Name="Nazvanie_disciplini" ColumnName="Nazvanie_disciplini" />
+                <ScalarProperty Name="Kl_chasov" ColumnName="Kl_chasov" />
+                <ScalarProperty Name="Tsikl_disciplini" ColumnName="Tsikl_disciplini" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fakultet">
+            <EntityTypeMapping TypeName="InformationayaSystemaVUZAModel.Fakultet">
+              <MappingFragment StoreEntitySet="Fakultet">
+                <ScalarProperty Name="Kod_fakulteta" ColumnName="Kod_fakulteta" />
+                <ScalarProperty Name="Nazvanie_fak" ColumnName="Nazvanie_fak" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="N_komnaty" ColumnName="N_komnaty" />
+                <ScalarProperty Name="N_korpusa" ColumnName="N_korpusa" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kafedra">
+            <EntityTypeMapping TypeName="InformationayaSystemaVUZAModel.Kafedra">
+              <MappingFragment StoreEntitySet="Kafedra">
+                <ScalarProperty Name="Kod_kafedry" ColumnName="Kod_kafedry" />
+                <ScalarProperty Name="Kod_fakulteta" ColumnName="Kod_fakulteta" />
+                <ScalarProperty Name="Kol_prepod" ColumnName="Kol_prepod" />
+                <ScalarProperty Name="Nazvanie_kaf" ColumnName="Nazvanie_kaf" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="N_komnaty" ColumnName="N_komnaty" />
+                <ScalarProperty Name="N_korpusa" ColumnName="N_korpusa" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prepodavatel">
+            <EntityTypeMapping TypeName="InformationayaSystemaVUZAModel.Prepodavatel">
+              <MappingFragment StoreEntitySet="Prepodavatel">
+                <ScalarProperty Name="Date_rozhd" ColumnName="Date_rozhd" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Kod_prepod" ColumnName="Kod_prepod" />
+                <ScalarProperty Name="Kod_kafedry" ColumnName="Kod_kafedry" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="God_post" ColumnName="God_post" />
+                <ScalarProperty Name="Stazh" ColumnName="Stazh" />
+                <ScalarProperty Name="Dolzhnost" ColumnName="Dolzhnost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Uchebnaya_nagruzka">
+            <EntityTypeMapping TypeName="InformationayaSystemaVUZAModel.Uchebnaya_nagruzka">
+              <MappingFragment StoreEntitySet="Uchebnaya_nagruzka">
+                <ScalarProperty Name="Kod_nagruzki" ColumnName="Kod_nagruzki" />
+                <ScalarProperty Name="Kod_prepod" ColumnName="Kod_prepod" />
+                <ScalarProperty Name="Kod_disciplini" ColumnName="Kod_disciplini" />
+                <ScalarProperty Name="Ucheb_god" ColumnName="Ucheb_god" />
+                <ScalarProperty Name="Semestr" ColumnName="Semestr" />
+                <ScalarProperty Name="Gruppy" ColumnName="Gruppy" />
+                <ScalarProperty Name="Kol_student" ColumnName="Kol_student" />
+                <ScalarProperty Name="Itog_kontrol" ColumnName="Itog_kontrol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="prepodsmall">
+            <EntityTypeMapping TypeName="InformationayaSystemaVUZAModel.prepodsmall">
+              <MappingFragment StoreEntitySet="prepodsmall">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+                <ScalarProperty Name="Стаж" ColumnName="Стаж" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
