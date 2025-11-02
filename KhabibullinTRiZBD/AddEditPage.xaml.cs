@@ -18,9 +18,6 @@ using System.Windows.Shapes;
 
 namespace KhabibullinTRiZBD
 {
-    /// <summary>
-    /// Логика взаимодействия для AddEditPage.xaml
-    /// </summary>
     public partial class AddEditPage : Page
     {
         private TeacherPage _teacherPage = new TeacherPage();
@@ -59,7 +56,6 @@ namespace KhabibullinTRiZBD
                 _currentPrepods.Kod_kafedry = InformationayaSystemaVUZAEntities.getInstance().Kafedra.Count();
             }
         }
-
         private void ChangePictureBtn_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog myOpenFileDialog = new OpenFileDialog();
@@ -76,8 +72,6 @@ namespace KhabibullinTRiZBD
                 LogoImage.Source = new BitmapImage(new Uri(myOpenFileDialog.FileName));
             }
         }
-
-
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder errors = new StringBuilder();
@@ -88,12 +82,10 @@ namespace KhabibullinTRiZBD
                 errors.AppendLine("Укажите фамилию преподавателя");
             if (string.IsNullOrWhiteSpace(_currentPrepods.Patronymic))
                 errors.AppendLine("Укажите отчество преподавателя");
-
             if (string.IsNullOrWhiteSpace(_currentPrepods.God_post.ToString()))
                 errors.AppendLine("Укажите год поступления преподавателя");
             else if (_currentPrepods.God_post > DateTime.Now.Year || _currentPrepods.God_post <= DateTime.Now.Year - 80)
                 errors.AppendLine("Год поступления преподавателя указан неверно");
-
             if (PrepodBirthday == null)
                 errors.AppendLine("Укажите дату рождения преподавателя");
             else
@@ -101,11 +93,8 @@ namespace KhabibullinTRiZBD
                 if (PrepodBirthday > DateTime.Today)
                     errors.AppendLine("Дата рождения преподавателя указана неверно");
             }
-
-
             if (ComboType.SelectedItem == null)
                 errors.AppendLine("Укажите должность преподавателя");
-
             if (errors.Length > 0)
             {
                 MessageBox.Show(errors.ToString());
@@ -115,8 +104,8 @@ namespace KhabibullinTRiZBD
             _currentPrepods.Date_rozhd = PrepodBirthday;
             _currentPrepods.Stazh = Convert.ToInt32(TBStazh.Text);
             _currentPrepods.Kod_kafedry = PickupCombo.SelectedIndex + 1;
-
             MessageBox.Show($"Date_rozhd {_currentPrepods.Date_rozhd}");
+
             if (_currentPrepods.Kod_prepod == 0)
             {
 
@@ -125,7 +114,6 @@ namespace KhabibullinTRiZBD
 
                 InformationayaSystemaVUZAEntities.getInstance().Prepodavatel.Add(_currentPrepods);
             }
-
             try
             {
                 InformationayaSystemaVUZAEntities.getInstance().SaveChanges();
@@ -138,15 +126,11 @@ namespace KhabibullinTRiZBD
                 MessageBox.Show(ex.Message.ToString());
             }
         }
-
         private void DeleteBtn_Click(object sender, RoutedEventArgs e)
         {
             var currentPrepod = (sender as Button).DataContext as Prepodavatel;
-
             var currentKafedry = InformationayaSystemaVUZAEntities.getInstance().Kafedra.ToList();
-
             currentKafedry = currentKafedry.Where(p => (p.Lastname == currentPrepod.Lastname && p.Firstname == currentPrepod.Firstname && p.Patronymic == currentPrepod.Patronymic)).ToList();
-
             if (currentKafedry.Count != 0)
             {
                 MessageBox.Show($"Невозможно выполнить удаление, так как этот преподаватель является заведующим факультета");
@@ -171,7 +155,6 @@ namespace KhabibullinTRiZBD
                 }
             }
         }
-
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(TBGodPost.Text))

@@ -16,9 +16,8 @@
             <RowDefinition Height="auto"></RowDefinition>
 
         </Grid.RowDefinitions>
-        
-        <WrapPanel Orientation="Horizontal">
 
+        <WrapPanel Orientation="Horizontal">
             <StackPanel Margin="10" Orientation="Horizontal">
                 <TextBlock Text="Поиск" TextAlignment="Center" Width="100" FontSize="20"></TextBlock>
                 <TextBox Name="TBoxSearch" TextChanged="TBoxSearch_TextChanged"  Width="300" FontSize="15"></TextBox>
@@ -48,7 +47,7 @@
             </StackPanel>
         </WrapPanel>
         <Button Content="Добавить преподавателя" Name="AddButton" Click="AddButton_Click" Width="300" Height="35" HorizontalAlignment="Right"></Button>
-        
+
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="3">
             <TextBlock Text="кол-во записей: " FontSize="30"></TextBlock>
             <TextBlock Name="TBlockCount" FontSize="30"></TextBlock>
@@ -87,7 +86,7 @@
                             <TextBlock Text="{Binding GetFIO, StringFormat={} | {0}}" HorizontalAlignment="Left" FontSize="24"></TextBlock>
                         </StackPanel>
                         <TextBlock Text="{Binding Stazh, StringFormat={} Стаж: {0}}" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" FontSize="24"></TextBlock>
-                        
+
                         <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" Margin="5">
                             <TextBlock Text="Название кафедры: " HorizontalAlignment="Left" FontSize="24"></TextBlock>
                             <TextBlock Text="{Binding GetKafedra}" HorizontalAlignment="Left" FontSize="24"></TextBlock>
