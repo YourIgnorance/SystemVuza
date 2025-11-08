@@ -104,7 +104,6 @@ namespace KhabibullinTRiZBD
             _currentPrepods.Date_rozhd = PrepodBirthday;
             _currentPrepods.Stazh = Convert.ToInt32(TBStazh.Text);
             _currentPrepods.Kod_kafedry = PickupCombo.SelectedIndex + 1;
-            MessageBox.Show($"Date_rozhd {_currentPrepods.Date_rozhd}");
 
             if (_currentPrepods.Kod_prepod == 0)
             {
